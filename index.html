@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>GemmaScript - AI-Powered Code Generator</title>
+    <meta name="title" content="GemmaScript - AI-Powered Code Generator">
+    <meta name="description" content="Generate code instantly with Gemma 3 AI. Describe what you want, get clean code in any language. Powered by Google's Gemma 3 via OpenRouter.">
+    <meta name="keywords" content="AI code generator, Gemma 3, code assistant, programming, HTML, CSS, JavaScript, Python, Qorath Studio">
+    <meta name="author" content="Qorath Studio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://qorathstudio.github.io/GemmaScript/">
+    <meta property="og:title" content="GemmaScript - AI-Powered Code Generator">
+    <meta property="og:description" content="Generate code instantly with Gemma 3 AI. Describe what you want, get clean code in any language.">
+    <meta property="og:image" content="https://qorathstudio.neocities.org/gemma.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="GemmaScript Logo - AI Code Generator">
+    <meta property="og:site_name" content="GemmaScript">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://qorathstudio.github.io/GemmaScript/">
+    <meta property="twitter:title" content="GemmaScript - AI-Powered Code Generator">
+    <meta property="twitter:description" content="Generate code instantly with Gemma 3 AI. Describe what you want, get clean code in any language.">
+    <meta property="twitter:image" content="https://qorathstudio.neocities.org/gemma.jpg">
+    <meta property="twitter:image:alt" content="GemmaScript Logo - AI Code Generator">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://qorathstudio.neocities.org/gemma.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="https://qorathstudio.neocities.org/gemma.jpg">
+    
+    <!-- Styles & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --code-bg: #0f172a;
+            --border: #e5e7eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(at 40% 20%, rgba(79, 70, 229, 0.1) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 50%, rgba(79, 70, 229, 0.1) 0px, transparent 50%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .credits {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .credit-badge {
+            background-color: var(--light);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .credit-badge i {
+            color: var(--primary);
+        }
+
+        main {
+            padding: 2.5rem 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .input-field {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        textarea, select, input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        textarea:focus, select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #0da271;
+        }
+
+        .output-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 992px) {
+            .output-section {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .code-output, .preview-output {
+            min-height: 300px;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .output-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .copy-btn {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .code-container {
+            background-color: var(--code-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 300px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .preview-container {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            min-height: 300px;
+            max-height: 500px;
+            overflow-y: auto;
+            background-color: white;
+        }
+
+        .preview-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--gray);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .preview-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--border);
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--gray);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(79, 70, 229, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background-color: #fee;
+            color: var(--error);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--error);
+            margin-bottom: 1rem;
+        }
+
+        .success-message {
+            background-color: #f0fdf4;
+            color: var(--success);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .instructions {
+            background-color: #f0f9ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .instructions h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .instructions ul {
+            padding-left: 1.5rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+
+        .language-badge {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://qorathstudio.neocities.org/gemma.jpg" alt="GemmaScript Logo">
+                    <div>
+                        <h1>GemmaScript</h1>
+                        <p class="tagline">AI-Powered Code Generator</p>
+                    </div>
+                </div>
+                <div class="credits">
+                    <div class="credit-badge">
+                        <i class="fas fa-code"></i>
+                        <span>Powered by Gemma 3</span>
+                    </div>
+                    <div class="credit-badge">
+                        <i class="fas fa-server"></i>
+                        <span>Via OpenRouter</span>
+                    </div>
+                    <div class="credit-badge">
+                        <i class="fas fa-crown"></i>
+                        <span>Qorath Studio</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Instructions -->
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> How to use GemmaScript</h3>
+            <ul>
+                <li>Describe the code you want in plain English</li>
+                <li>Specify the programming language or let the AI detect it</li>
+                <li>Gemma 3 will generate code inside <code>&lt;gemmascript-code type="language"&gt;</code> tags</li>
+                <li>Only the code INSIDE the tags will be extracted and displayed</li>
+                <li>HTML code (type="html") will be rendered live in the preview pane</li>
+                <li>Each request is independent (memoryless AI)</li>
+            </ul>
+        </div>
+
+        <!-- Input Section -->
+        <section class="card">
+            <h2 class="section-title"><i class="fas fa-terminal"></i> Code Request</h2>
+            <div class="input-group">
+                <div class="input-field">
+                    <label for="language">Language / Framework</label>
+                    <select id="language">
+                        <option value="">Auto-detect from description</option>
+                        <option value="html">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                        <option value="php">PHP</option>
+                        <option value="csharp">C#</option>
+                        <option value="cpp">C++</option>
+                        <option value="sql">SQL</option>
+                        <option value="rust">Rust</option>
+                        <option value="go">Go</option>
+                    </select>
+                </div>
+                
+                <div class="input-field">
+                    <label for="codeDescription">Describe the code you need</label>
+                    <textarea id="codeDescription" placeholder="Example: Create a responsive navbar with a logo on the left and menu items on the right. Use CSS for styling and make it mobile-friendly."></textarea>
+                </div>
+                
+                <div class="input-row">
+                    <button id="generateBtn" class="btn">
+                        <i class="fas fa-bolt"></i> Generate Code
+                    </button>
+                    <button id="clearBtn" class="btn btn-secondary">
+                        <i class="fas fa-broom"></i> Clear All
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Output Section -->
+        <section class="output-section">
+            <!-- Code Output -->
+            <div class="card code-output">
+                <div class="output-header">
+                    <h3 class="output-title">Generated Code <span id="codeLangBadge" class="language-badge" style="display:none;"></span></h3>
+                    <button id="copyCodeBtn" class="copy-btn" disabled>
+                        <i class="far fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="code-container">
+                    <div id="codePlaceholder" class="preview-placeholder">
+                        <i class="fas fa-code"></i>
+                        <p>Your generated code will appear here</p>
+                    </div>
+                    <pre id="codeOutput" style="display:none;"><code class="hljs" id="generatedCode"></code></pre>
+                    <div id="codeLoading" class="loading" style="display:none;">
+                        <div class="spinner"></div>
+                        <p>Generating code with Gemma 3...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Output -->
+            <div class="card preview-output">
+                <div class="output-header">
+                    <h3 class="output-title">Live Preview</h3>
+                    <button id="openPreviewBtn" class="copy-btn" disabled>
+                        <i class="fas fa-external-link-alt"></i> Open
+                    </button>
+                </div>
+                <div class="preview-container">
+                    <div id="previewPlaceholder" class="preview-placeholder">
+                        <i class="fas fa-eye"></i>
+                        <p>Preview will appear here for HTML output</p>
+                        <p style="font-size:0.9rem;margin-top:10px;">For other languages, view the generated code</p>
+                    </div>
+                    <iframe id="previewFrame" style="display:none; width:100%; height:100%; border:none;"></iframe>
+                    <div id="previewLoading" class="loading" style="display:none;">
+                        <div class="spinner"></div>
+                        <p>Rendering preview...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Messages -->
+        <div id="messageContainer"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://qorathstudio.neocities.org/gemma.jpg" alt="GemmaScript Logo">
+                    <span>GemmaScript</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://openrouter.ai" target="_blank">OpenRouter</a>
+                    <a href="https://ai.google.dev/gemma" target="_blank">Gemma 3 by Google</a>
+                    <a href="https://github.com/QorathStudio" target="_blank">Qorath Studio</a>
+                    <a href="https://gemma3.netlify.app/" target="_blank">Gemma 3 Proxy</a>
+                </div>
+                <p class="copyright">
+                    Powered by Google's Gemma 3 via OpenRouter. Created by Qorath Studio.<br>
+                    GemmaScript is a memoryless AI code generator. Each request is independent.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/htmlbars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/csharp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/go.min.js"></script>
+    
+    <script>
+        // DOM Elements
+        const generateBtn = document.getElementById('generateBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const copyCodeBtn = document.getElementById('copyCodeBtn');
+        const openPreviewBtn = document.getElementById('openPreviewBtn');
+        const codeDescription = document.getElementById('codeDescription');
+        const languageSelect = document.getElementById('language');
+        const codeOutput = document.getElementById('codeOutput');
+        const generatedCode = document.getElementById('generatedCode');
+        const codePlaceholder = document.getElementById('codePlaceholder');
+        const codeLoading = document.getElementById('codeLoading');
+        const previewFrame = document.getElementById('previewFrame');
+        const previewPlaceholder = document.getElementById('previewPlaceholder');
+        const previewLoading = document.getElementById('previewLoading');
+        const messageContainer = document.getElementById('messageContainer');
+        const codeLangBadge = document.getElementById('codeLangBadge');
+
+        // API Endpoint
+        const API_ENDPOINT = 'https://gemma3.netlify.app/';
+
+        // Proper unescape function that removes escape characters but keeps literal backslashes
+        function unescapeString(str) {
+            // First, handle the common escape sequences
+            let result = '';
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] === '\\') {
+                    // Check next character
+                    if (i + 1 < str.length) {
+                        const nextChar = str[i + 1];
+                        switch (nextChar) {
+                            case 'n':
+                                result += '\n';
+                                i++;
+                                break;
+                            case 't':
+                                result += '\t';
+                                i++;
+                                break;
+                            case 'r':
+                                result += '\r';
+                                i++;
+                                break;
+                            case '"':
+                                result += '"';
+                                i++;
+                                break;
+                            case "'":
+                                result += "'";
+                                i++;
+                                break;
+                            case '\\':
+                                // Double backslash becomes single backslash
+                                result += '\\';
+                                i++;
+                                break;
+                            default:
+                                // If it's not a valid escape sequence, keep the backslash
+                                result += '\\';
+                        }
+                    } else {
+                        // Backslash at end of string, keep it
+                        result += '\\';
+                    }
+                } else {
+                    result += str[i];
+                }
+            }
+            return result;
+        }
+
+        // Function to clean language type - properly handles escaped strings
+        function cleanLanguageType(lang) {
+            if (!lang) return 'text';
+            
+            // First unescape the string to handle escape sequences
+            let cleanLang = unescapeString(lang);
+            
+            // Trim whitespace
+            cleanLang = cleanLang.trim();
+            
+            // Convert to lowercase
+            cleanLang = cleanLang.toLowerCase();
+            
+            // Special case for C++ (common variations)
+            if (cleanLang === 'c++' || cleanLang === 'cpp' || cleanLang === 'cplusplus') {
+                return 'cpp';
+            }
+            
+            // Special case for C#
+            if (cleanLang === 'c#' || cleanLang === 'csharp' || cleanLang === 'c\\#') {
+                return 'csharp';
+            }
+            
+            // Special case for JavaScript
+            if (cleanLang === 'js' || cleanLang === 'javascript') {
+                return 'javascript';
+            }
+            
+            // Special case for TypeScript
+            if (cleanLang === 'ts' || cleanLang === 'typescript') {
+                return 'typescript';
+            }
+            
+            // Handle Windows path-like strings (like \html\)
+            // Remove any remaining backslashes that aren't part of escape sequences
+            cleanLang = cleanLang.replace(/^\\+|\\+$/g, '');
+            
+            return cleanLang;
+        }
+
+        // Show message function
+        function showMessage(message, type = 'info') {
+            const messageEl = document.createElement('div');
+            messageEl.className = type === 'error' ? 'error-message' : 
+                                 type === 'success' ? 'success-message' : 'instructions';
+            
+            const icon = type === 'error' ? 'exclamation-circle' : 
+                        type === 'success' ? 'check-circle' : 'info-circle';
+            
+            messageEl.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
+            messageContainer.appendChild(messageEl);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                messageEl.style.opacity = '0';
+                messageEl.style.transition = 'opacity 0.5s';
+                setTimeout(() => messageEl.remove(), 500);
+            }, 5000);
+        }
+
+        // Extract code from XML block - FIXED VERSION
+        function extractCodeFromResponse(response) {
+            console.log("Raw response:", response);
+            
+            // Look for the gemmascript-code block with REGEX
+            const regex = /<gemmascript-code\s+type="([^"]*?)"\s*>([\s\S]*?)<\/gemmascript-code>/i;
+            const match = response.match(regex);
+            
+            if (match) {
+                console.log("Found gemmascript-code block!");
+                console.log("Raw type:", match[1]);
+                
+                const rawLang = match[1] || 'text';
+                const lang = cleanLanguageType(rawLang);
+                console.log("Cleaned type:", lang);
+                
+                // Process the code content with proper unescaping
+                let code = match[2];
+                code = unescapeString(code);
+                
+                return { lang, code: code.trim(), rawLang: rawLang };
+            }
+            
+            // Try alternative regex patterns
+            const altRegex1 = /<gemmascript-code\s+type='([^']*?)'\s*>([\s\S]*?)<\/gemmascript-code>/i;
+            const altMatch1 = response.match(altRegex1);
+            
+            if (altMatch1) {
+                const rawLang = altMatch1[1] || 'text';
+                const lang = cleanLanguageType(rawLang);
+                let code = altMatch1[2];
+                code = unescapeString(code);
+                return { lang, code: code.trim(), rawLang: rawLang };
+            }
+            
+            // Try without quotes around type
+            const altRegex2 = /<gemmascript-code\s+type=([^\s>]+)\s*>([\s\S]*?)<\/gemmascript-code>/i;
+            const altMatch2 = response.match(altRegex2);
+            
+            if (altMatch2) {
+                const rawLang = altMatch2[1].replace(/['"]/g, '') || 'text';
+                const lang = cleanLanguageType(rawLang);
+                let code = altMatch2[2];
+                code = unescapeString(code);
+                return { lang, code: code.trim(), rawLang: rawLang };
+            }
+            
+            // Try with backticks (code blocks) as fallback
+            const codeBlockRegex = /```(?:\w+)?\s*\n?([\s\S]*?)```/;
+            const codeBlockMatch = response.match(codeBlockRegex);
+            
+            if (codeBlockMatch) {
+                const rawLang = languageSelect.value || 'text';
+                const lang = cleanLanguageType(rawLang);
+                let code = codeBlockMatch[1];
+                code = unescapeString(code);
+                return { lang, code: code.trim(), rawLang: rawLang };
+            }
+            
+            // If nothing found, return error
+            throw new Error('No <gemmascript-code> block found in AI response. The AI should output code in this format: <gemmascript-code type="language">code here</gemmascript-code>');
+        }
+
+        // Generate code with AI
+        async function generateCode() {
+            const description = codeDescription.value.trim();
+            if (!description) {
+                showMessage('Please describe the code you want to generate.', 'error');
+                return;
+            }
+
+            // Show loading state
+            codePlaceholder.style.display = 'none';
+            codeOutput.style.display = 'none';
+            codeLoading.style.display = 'flex';
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            
+            // Hide preview
+            previewFrame.style.display = 'none';
+            previewPlaceholder.style.display = 'flex';
+
+            // Prepare the prompt - telling AI EXACTLY what we want
+            const language = languageSelect.value;
+            let prompt = `Generate code for: "${description}"\n\n`;
+            
+            prompt += `IMPORTANT: You MUST output the code inside <gemmascript-code> tags like this:\n`;
+            prompt += `<gemmascript-code type="language">\n`;
+            prompt += `// Your code here\n`;
+            prompt += `</gemmascript-code>\n\n`;
+            
+            prompt += `Rules:\n`;
+            prompt += `1. Determine the appropriate programming language based on the request\n`;
+            prompt += `2. Put the type attribute with the language name (e.g., type="html", type="python", type="javascript")\n`;
+            prompt += `3. ONLY include the actual code inside the tags, no explanations\n`;
+            prompt += `4. Use proper line breaks and indentation\n`;
+            prompt += `5. Do NOT escape characters unnecessarily in the type attribute\n`;
+            prompt += `6. If you need to include a backslash in the code (like in Windows paths or regex), use double backslash: \\\\\n`;
+            
+            if (language) {
+                prompt += `7. Use ${language} as the programming language\n`;
+            }
+
+            try {
+                // Call the Gemma 3 API
+                console.log("Sending request to API with prompt:", prompt);
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question: prompt })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log("API response:", data);
+                
+                // Extract code from response
+                const { lang, code, rawLang } = extractCodeFromResponse(data.message || data.response || data.answer || JSON.stringify(data));
+                
+                // Display the code
+                generatedCode.textContent = code;
+                codeOutput.style.display = 'block';
+                codeLoading.style.display = 'none';
+                
+                // Apply syntax highlighting
+                const hljsLang = lang.toLowerCase();
+                generatedCode.className = `hljs language-${hljsLang}`;
+                try {
+                    hljs.highlightElement(generatedCode);
+                } catch (e) {
+                    console.log("Highlight.js error, using default highlighting");
+                }
+                
+                // Update language badge
+                codeLangBadge.textContent = rawLang.toUpperCase();
+                codeLangBadge.style.display = 'inline-block';
+                
+                // Enable copy button
+                copyCodeBtn.disabled = false;
+                
+                // If it's HTML, render preview
+                console.log("Detected language:", lang);
+                if (lang === 'html') {
+                    renderHtmlPreview(code);
+                } else {
+                    previewPlaceholder.innerHTML = `
+                        <i class="fas fa-file-code"></i>
+                        <p>Preview only available for HTML code</p>
+                        <p style="font-size:0.9rem;margin-top:10px;">Generated ${rawLang.toUpperCase()} code displayed on the left</p>
+                    `;
+                    previewPlaceholder.style.display = 'flex';
+                    openPreviewBtn.disabled = true;
+                }
+                
+                showMessage(`Code generated successfully! Language: ${rawLang}`, 'success');
+                
+            } catch (error) {
+                console.error('Error generating code:', error);
+                showMessage(`Failed to generate code: ${error.message}`, 'error');
+                
+                // Reset UI
+                codeLoading.style.display = 'none';
+                codePlaceholder.style.display = 'flex';
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '<i class="fas fa-bolt"></i> Generate Code';
+            }
+        }
+
+        // Render HTML preview
+        function renderHtmlPreview(htmlCode) {
+            previewLoading.style.display = 'flex';
+            previewPlaceholder.style.display = 'none';
+            
+            setTimeout(() => {
+                try {
+                    // Create a blob URL for the HTML
+                    const blob = new Blob([htmlCode], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+                    
+                    // Load into iframe
+                    previewFrame.src = url;
+                    previewFrame.style.display = 'block';
+                    previewLoading.style.display = 'none';
+                    
+                    // Enable open button
+                    openPreviewBtn.disabled = false;
+                    openPreviewBtn.onclick = () => {
+                        window.open(url, '_blank');
+                        // Don't revoke immediately as the user might want to keep it open
+                        setTimeout(() => URL.revokeObjectURL(url), 30000);
+                    };
+                    
+                    // Clean up blob URL after 30 seconds
+                    setTimeout(() => {
+                        try {
+                            URL.revokeObjectURL(url);
+                        } catch (e) {
+                            console.log("Error revoking URL:", e);
+                        }
+                    }, 30000);
+                } catch (e) {
+                    console.error("Error rendering HTML preview:", e);
+                    previewLoading.style.display = 'none';
+                    previewPlaceholder.innerHTML = `
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Error rendering HTML preview</p>
+                        <p style="font-size:0.9rem;margin-top:10px;">${e.message}</p>
+                    `;
+                    previewPlaceholder.style.display = 'flex';
+                }
+            }, 500);
+        }
+
+        // Copy code to clipboard
+        function copyCodeToClipboard() {
+            const code = generatedCode.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                showMessage('Code copied to clipboard!', 'success');
+            }).catch(err => {
+                showMessage('Failed to copy code: ' + err.message, 'error');
+            });
+        }
+
+        // Clear all inputs and outputs
+        function clearAll() {
+            codeDescription.value = '';
+            languageSelect.value = '';
+            codeOutput.style.display = 'none';
+            codePlaceholder.style.display = 'flex';
+            previewFrame.style.display = 'none';
+            previewPlaceholder.style.display = 'flex';
+            previewPlaceholder.innerHTML = `
+                <i class="fas fa-eye"></i>
+                <p>Preview will appear here for HTML output</p>
+                <p style="font-size:0.9rem;margin-top:10px;">For other languages, view the generated code</p>
+            `;
+            codeLangBadge.style.display = 'none';
+            copyCodeBtn.disabled = true;
+            openPreviewBtn.disabled = true;
+            messageContainer.innerHTML = '';
+            
+            showMessage('Cleared all inputs and outputs.', 'success');
+        }
+
+        // Event Listeners
+        generateBtn.addEventListener('click', generateCode);
+        clearBtn.addEventListener('click', clearAll);
+        copyCodeBtn.addEventListener('click', copyCodeToClipboard);
+
+        // Enter key to generate code
+        codeDescription.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                generateCode();
+            }
+        });
+
+        // Initialize with an example
+        window.addEventListener('DOMContentLoaded', () => {
+            // Pre-fill with an example
+            codeDescription.value = "Create a simple HTML page with a header, main content area, and footer. Use CSS to style it with a blue color scheme.";
+            languageSelect.value = "html";
+            
+            // Show welcome message
+            setTimeout(() => {
+                showMessage('Welcome to GemmaScript! Describe the code you need and AI will generate it inside <gemmascript-code> tags.', 'success');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
